@@ -14,14 +14,14 @@ Remotion 合成在代码仓库 `promo-video/src/Composition.tsx`（`npm run dev`
 
 ## 里面有什么（2026-10-04 整理 365 MB；10-10 追加 V3.0.3 91 MB；单文件最大 39 MB）
 
-> 10/10 用户定不再做解说类发布视频：代码仓库里 `KachaV301` / `KachaV303` 两个合成、录屏编排（`rig/takes.cjs`、`rig/takes-v303.cjs`）和配音脚本（`rig/vo.sh`、`rig/vo-v303.sh`）都删了，删之前最后一版在 `dc31eac`（`git show dc31eac:promo-video/src/V303.tsx`）。素材只在这里。
+> 10/10 用户定不再做解说类发布视频：代码仓库里 `KachaV301` / `KachaV303` 两个合成、录屏编排（`rig/takes.cjs`、`rig/takes-v303.cjs`）和配音脚本（`rig/vo.sh`、`rig/vo-v303.sh`）都删了，删之前最后一版在 `dc31eac`（`git show dc31eac:promo-video/src/V303.tsx`）。同一天 V1 解说宣传片的三个合成（`KachaBearPromo` / `KachaBearVideoOnly` / `KachaBearOptimized`）也删了（`0732639`），源码在标签 `v3.0.3` 里（`git show v3.0.3:promo-video/src/PromoVideo.tsx`）。素材只在这里。
 
 | 版本 | 路径 | 是什么 | 哪个合成用 |
 | --- | --- | --- | --- |
-| V1（9/13） | `public/media/gameplay.mp4`（24 MB） | 第一版录屏 | `KachaBearPromo` / `KachaBearVideoOnly` |
-| V1 | `public/media/kacha-optimized-base.mp4`（10 MB） | 优化版底片 | `KachaBearOptimized` |
+| V1（9/13） | `public/media/gameplay.mp4`（24 MB） | 第一版录屏 | `KachaBearPromo` / `KachaBearVideoOnly`（10/10 已删） |
+| V1 | `public/media/kacha-optimized-base.mp4`（10 MB） | 优化版底片 | `KachaBearOptimized`（10/10 已删） |
 | V1 | `public/media/user-edit-1080.mp4`（13 MB） | 9/13 手剪的一版 | 没有合成引用，只是留档 |
-| V1 | `public/voice/narration-cut.wav`（6 MB）、`public/voice/raw/*.m4a`（9 段，3 MB） | 真人口播剪好的 / 原始录音 | `KachaBearPromo` |
+| V1 | `public/voice/narration-cut.wav`（6 MB）、`public/voice/raw/*.m4a`（9 段，3 MB） | 真人口播剪好的 / 原始录音 | `KachaBearPromo`（10/10 已删） |
 | V1 | `out/01a09a55-….png`、`out/kacha-bear-voice-only.{wav,m4a}` | 封面图、口播单独导出 | — |
 | V2（9/17） | `public/media/pure-wax-raw.mov`（6 MB）、`pure-choc-raw.mov`（8 MB） | 极光蜡壳 / 黑巧脆壳纯享原始录屏 | `PureWax` / `PureChoc` |
 | V2（9/20） | `public/media/v2/raw1–7.mp4`、`two-finger.mp4`（23 MB）、`v2/vo/vo01–14.{wav,m4a}`（12 MB） | V2 发布视频 7 段录屏 + 双指镜头 + 14 段 AI 配音 | V2 发布视频用的是 Shotcut（工程在代码仓库 `v2` 分支 `promo-video/shotcut/`），不是 Remotion |
@@ -41,6 +41,7 @@ Remotion 合成在代码仓库 `promo-video/src/Composition.tsx`（`npm run dev`
 - 小红书小工具 zip：在代码仓库各版本标签里（`git show v3.0.1:release/kacha-bear-xhs-minitool.zip > x.zip`）。
 - V3.0.1 原始录屏 `_takes/`（22,957 帧 jpg + webm）：10/4 删了，没备份；需要就用 `promo-video/rig` 重录。
 - V3.0.3 原始录屏 `_takes/`（3.2 GB）：10/10 删了，没备份。
+- Tripothon 黑客松 demo（10/5 交的）：剪好的 6 段、配音、成片都只在代码仓库本地的 `promo-video/public/media/tripothon/`、`public/voice/tripothon-vo/`、`out/` 里，没备份到这里；它的原始录屏 `_takes/`（3.9 GB）10/10 删了。
 - 小红书上发出去的最终版本以小红书为准，这里的成片是上传前的文件。
 
 ## 规矩
