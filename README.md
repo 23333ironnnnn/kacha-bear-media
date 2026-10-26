@@ -10,9 +10,9 @@
 rsync -a --ignore-existing ../kacha-bear-media/promo-video/ promo-video/
 ```
 
-Remotion 合成在代码仓库 `promo-video/src/Composition.tsx`（`npm run dev` 预览、`npx remotion render <id>` 渲染）。
+Remotion 合成在代码仓库 `promo-video/src/Composition.tsx`（`npm run dev` 预览、`npx remotion render <id>` 渲染）。V4.1 的 `KachaV41` / `KachaV41Cover` 别用 `npx remotion render`（它会把整个 `public/` 拷一遍，本地 `_takes/` 有好几 GB），用 `node promo-video/rig/render-v41.cjs`。
 
-## 里面有什么（2026-10-04 整理 365 MB；10-10 追加 V3.0.3 91 MB；单文件最大 39 MB）
+## 里面有什么（2026-10-04 整理 365 MB；10-10 追加 V3.0.3 91 MB；10-26 追加 V4.1 300 MB；单文件最大 52 MB）
 
 > 10/10 用户定不再做解说类发布视频：代码仓库里 `KachaV301` / `KachaV303` 两个合成、录屏编排（`rig/takes.cjs`、`rig/takes-v303.cjs`）和配音脚本（`rig/vo.sh`、`rig/vo-v303.sh`）都删了，删之前最后一版在 `dc31eac`（`git show dc31eac:promo-video/src/V303.tsx`）。同一天 V1 解说宣传片的三个合成（`KachaBearPromo` / `KachaBearVideoOnly` / `KachaBearOptimized`）也删了（`0732639`），源码在标签 `v3.0.3` 里（`git show v3.0.3:promo-video/src/PromoVideo.tsx`）。素材只在这里。
 
@@ -35,6 +35,14 @@ Remotion 合成在代码仓库 `promo-video/src/Composition.tsx`（`npm run dev`
 | V3.0.3（10/9） | `public/media/v303/*.mp4`（12 段，50 MB）、`_saved/*.json` + `link.txt` | rig 自动录屏剪好的 12 段 + 录制时存下的存档（页面开在线上域名、请求转到本机录屏服务录的） | `KachaV303` / `KachaV303Clean`（10/10 已删） |
 | V3.0.3 | `public/voice/v303-vo/{云夏,晓伊}/vo0–6.{wav,mp3}`、`全片口播-*.mp3`（13 MB） | edge-tts 配音两个声音各一套（预览用的是云夏 vo0 / vo6 + 晓伊 vo1–vo5） | 同上 |
 | V3.0.3 | `out/咔嚓熊-V3.0.3-预览-1080p.mp4`、`-预览-无口播-1080p.mp4`（28 MB） | 3.0.3 发布视频预览（64 s，−16 LUFS）/ 无口播版。**没发**：10/10 用户定不做解说视频 | — |
+| V4.1（10/26） | `public/media/v41/*.mp4` + `*.marks.json`（16 段，207 MB） | rig 代录的 16 段（录的 v4 本地构建，画布 1170×2532），marks 记每次按下 / 松手的时刻、帧率、画布尺寸 | `KachaV41` |
+| V4.1 | `public/media/v41/_still/`、`_proxy/`、`_data/gestures.json`、`_env/`（14 MB） | `rig/prep-v41.cjs` 备的料：抠圆的球（`*-press` 给封面）、九宫格小样、爪子轨迹、声波条用的响度包络 | `KachaV41` / `KachaV41Cover` |
+| V4.1 | `public/media/v41/sfx/*.wav`（2 MB） | `rig/sfx-v41.cjs` 代码合成的「啵 / 盖章 / 唰 / 嗒」+ S5 轻节拍，随时能重新生成 | `KachaV41` |
+| V4.1 | `public/media/v41/share-{poster,color}.png`、`brand/bear-mark.jpg` | 分享卡原图（S8 用海报卡）、小熊头像 | `KachaV41` / `KachaV41Cover` |
+| V4.1 | `public/media/v41/storyboard.jpg`、`ref/`（31 张）、`_probe/`、`probe-sheet.jpg`、`_s-*.jpg`、`_sheet-ice-letter.jpg`（22 MB） | 分镜图 + 参考帧，量球位置的截图和挑帧用的联系表 | — |
+| V4.1 | `public/media/v41/_preview/素材预览.mp4`、`素材联系表.jpg`（11 MB） | 步骤 2 给用户验收素材用的预览 | — |
+| V4.1 | `public/media/fonts/ZCOOLKuaiLe-Regular.ttf` + `OFL.txt` | 站酷快乐体（OFL，可商用） | `KachaV41` / `KachaV41Cover` |
+| V4.1 | `out/咔嚓熊-V4.1-手作球-宣传片-1080p.mp4`（39 MB）、`-封面.png` | V4.1 手作球宣传片成片（37 s，无口播，−19 LUFS）+ 3:4 封面 1080×1440 | — |
 
 ## 不在这里的
 
@@ -42,6 +50,8 @@ Remotion 合成在代码仓库 `promo-video/src/Composition.tsx`（`npm run dev`
 - V3.0.1 原始录屏 `_takes/`（22,957 帧 jpg + webm）：10/4 删了，没备份；需要就用 `promo-video/rig` 重录。
 - V3.0.3 原始录屏 `_takes/`（3.2 GB）：10/10 删了，没备份。
 - Tripothon 黑客松 demo（10/5 交的）：剪好的 6 段、配音、成片都只在代码仓库本地的 `promo-video/public/media/tripothon/`、`public/voice/tripothon-vo/`、`out/` 里，没备份到这里；它的原始录屏 `_takes/`（3.9 GB）10/10 删了。
+- V4.1 原始帧 `public/media/v41/_takes/`（3.8 GB）：没备份；要重录用代码仓库的 `promo-video/rig/takes-v41.cjs`（录本地构建 `npx vite preview --port 4175`，别录线上）。
+- V4.1 原片 `out/咔嚓熊-V4.1-手作球-宣传片-raw.mkv`（45 MB，做母带之前的无损音轨）没放：`render-v41.cjs` 两分钟就能重出。
 - 小红书上发出去的最终版本以小红书为准，这里的成片是上传前的文件。
 
 ## 规矩
