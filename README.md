@@ -12,7 +12,7 @@ rsync -a --ignore-existing ../kacha-bear-media/promo-video/ promo-video/
 
 Remotion 合成在代码仓库 `promo-video/src/Composition.tsx`（`npm run dev` 预览、`npx remotion render <id>` 渲染）。V4.1 的 `KachaV41` / `KachaV41Cover` 别用 `npx remotion render`（它会把整个 `public/` 拷一遍，本地 `_takes/` 有好几 GB），用 `node promo-video/rig/render-v41.cjs`。
 
-## 里面有什么（2026-10-04 整理 365 MB；10-10 追加 V3.0.3 91 MB；10-26 追加 V4.1 300 MB；单文件最大 52 MB）
+## 里面有什么（2026-10-04 整理 365 MB；10-10 追加 V3.0.3 91 MB；10-26 追加 V4.1 300 MB；10-27 追加新物集封面 1.5 MB；单文件最大 52 MB）
 
 > 10/10 用户定不再做解说类发布视频：代码仓库里 `KachaV301` / `KachaV303` 两个合成、录屏编排（`rig/takes.cjs`、`rig/takes-v303.cjs`）和配音脚本（`rig/vo.sh`、`rig/vo-v303.sh`）都删了，删之前最后一版在 `dc31eac`（`git show dc31eac:promo-video/src/V303.tsx`）。同一天 V1 解说宣传片的三个合成（`KachaBearPromo` / `KachaBearVideoOnly` / `KachaBearOptimized`）也删了（`0732639`），源码在标签 `v3.0.3` 里（`git show v3.0.3:promo-video/src/PromoVideo.tsx`）。素材只在这里。
 
@@ -43,6 +43,7 @@ Remotion 合成在代码仓库 `promo-video/src/Composition.tsx`（`npm run dev`
 | V4.1 | `public/media/v41/_preview/素材预览.mp4`、`素材联系表.jpg`（11 MB） | 步骤 2 给用户验收素材用的预览 | — |
 | V4.1 | `public/media/fonts/ZCOOLKuaiLe-Regular.ttf` + `OFL.txt` | 站酷快乐体（OFL，可商用） | `KachaV41` / `KachaV41Cover` |
 | V4.1 | `out/咔嚓熊-V4.1-手作球-宣传片-1080p.mp4`（39 MB）、`-封面.png` | V4.1 手作球宣传片成片（37 s，无口播，−19 LUFS）+ 3:4 封面 1080×1440 | — |
+| 新物集（10/26） | `out/咔嚓熊-新物集-封面-3x4.png`（1.5 MB） | 投新物集「AI 游戏流量奖池」用的通用版 3:4 封面 1080×1440：V4.1 那张去掉「来了 / 新品类」，标题「咔嚓熊」+ 印章「解压捏捏」+ 副标题「自己做一颗 · 捏到停不下来」；提交记录在代码仓库 `V4/咔嚓熊-新物集提交.md`（分支 `feat/xwj`） | `KachaXwjCover`（代码仓库 `feat/xwj`，`node promo-video/rig/render-v41.cjs` 同一套料） |
 
 ## 不在这里的
 
