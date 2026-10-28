@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: 'ZK'; src: url('../assets/ZCOOLKuaiLe.ttf'); }
+:root {
+  --mint: #a9dcc5; --mint-deep: #7cc3a5; --mint-ink: #2f7a5a; --cream: #fdf6e9; --cream2: #f6ead3;
+  --choc: #3a2218; --ink: #2a160d; --pink: #f4a9b0; --white: #fffdf8;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #444; }
+.page { width: 1080px; height: 1440px; position: relative; overflow: hidden; background: var(--mint); font-family: 'PingFang SC', sans-serif; color: var(--choc); margin-bottom: 40px; }
+img { display: block; }
+
+/* 描边大字：底下一层描边、上面一层填色 */
+.ol { position: relative; display: inline-block; }
+.ol > b { font-weight: inherit; }
+.ol > b:first-child { position: absolute; inset: 0; -webkit-text-stroke: var(--sw, 16px) var(--sc, var(--white)); color: var(--sc, var(--white)); text-shadow: var(--sh, none); }
+.ol > b:last-child { position: relative; color: var(--fc, var(--ink)); }
+
+.spark { position: absolute; color: var(--white); font-size: 54px; line-height: 1; opacity: .95; }
+
+/* ── 封面 ── */
+.cover { background: radial-gradient(circle at 50% 66%, #e2f6ec 0, #b9e5d0 38%, #9ed6bd 72%, #8ccdb0 100%); }
+.cover .frame { position: absolute; inset: 26px; border: 6px solid rgba(255, 253, 248, .75); border-radius: 46px; }
+.cover .brand { position: absolute; top: 74px; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 22px; }
+.cover .brand img { width: 112px; height: 112px; border-radius: 50%; border: 7px solid var(--white); box-shadow: 0 6px 16px rgba(42, 22, 13, .18); }
+.cover .brand .ol { font-family: 'ZK'; font-size: 86px; letter-spacing: 4px; --fc: var(--white); --sc: var(--ink); --sw: 18px; }
+.cover .hello { position: absolute; top: 214px; left: 0; right: 0; text-align: center; font-family: 'ZK'; font-size: 268px; line-height: 1.02; letter-spacing: -6px; transform: rotate(-3deg); }
+.cover .hello .ol { --fc: var(--ink); --sc: var(--white); --sw: 30px; --sh: 0 16px 0 var(--mint-deep); }
+.cover .mascot { position: absolute; width: 770px; left: 155px; top: 584px; filter: drop-shadow(0 24px 30px rgba(42, 22, 13, .28)); }
+.cover .orb { position: absolute; z-index: 2; filter: drop-shadow(0 16px 18px rgba(42, 22, 13, .25)); }
+.cover .tag { position: absolute; z-index: 3; bottom: 64px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--white); font-size: 50px; font-weight: 600; padding: 20px 54px 22px; border-radius: 80px; letter-spacing: 3px; white-space: nowrap; box-shadow: 0 10px 0 rgba(42, 22, 13, .18); }
+.cover .tag em { font-style: normal; color: var(--mint); margin-right: 22px; }
+
+/* ── 功能页模版 ── */
+.feat .card { position: absolute; left: 54px; right: 54px; top: 58px; height: 1204px; background: var(--cream); border-radius: 48px; box-shadow: 0 12px 0 rgba(42, 22, 13, .07); }
+.feat .avatar { position: absolute; left: 50%; top: 46px; width: 128px; height: 128px; margin-left: -64px; border-radius: 50%; border: 7px solid var(--white); box-shadow: 0 6px 18px rgba(42, 22, 13, .18); }
+.feat .cap { position: absolute; left: 30px; right: 30px; top: 206px; text-align: center; font-size: 44px; font-weight: 600; letter-spacing: 1px; line-height: 1.3; }
+.feat .stage { position: absolute; left: 0; right: 0; top: 312px; display: flex; justify-content: center; align-items: flex-start; gap: 22px; }
+.feat .col { position: relative; display: flex; flex-direction: column; align-items: center; }
+.phone { border-radius: 34px; border: 7px solid var(--ink); box-shadow: 0 22px 40px rgba(42, 22, 13, .22); background: var(--ink); }
+.w3 { width: 298px; } .w2 { width: 340px; } .w2s { width: 316px; } .w1 { width: 372px; }
+.pill { margin-top: 26px; font-size: 31px; font-weight: 600; color: var(--choc); background: var(--cream2); padding: 9px 24px 11px; border-radius: 40px; white-space: nowrap; }
+.pill.mint { background: #d6efe2; color: var(--mint-ink); }
+.chip { position: absolute; border-radius: 26px; border: 6px solid var(--white); box-shadow: 0 14px 30px rgba(42, 22, 13, .28); }
+.ttl { position: absolute; left: 66px; top: 1158px; display: flex; align-items: flex-end; gap: 20px; white-space: nowrap; }
+.ttl .num { font-family: 'Avenir Next'; font-weight: 800; font-style: italic; font-size: 222px; line-height: .8; letter-spacing: -10px; --fc: var(--ink); --sc: var(--cream); --sw: 14px; }
+.ttl .word { font-family: 'ZK'; font-size: 118px; line-height: 1; padding-bottom: 4px; --fc: var(--ink); --sc: var(--white); --sw: 16px; }
+.feat .spark { color: var(--mint-deep); }
+
+/* 聊天卡（通用气泡，不画任何 App 的界面） */
+.bubble { width: 486px; background: #fff; border-radius: 30px; padding: 22px 22px 24px; box-shadow: 0 22px 40px rgba(42, 22, 13, .2); }
+.bubble .bh { display: flex; align-items: center; gap: 12px; font-size: 26px; color: #8a7a70; }
+.bubble .bh img { width: 40px; height: 40px; border-radius: 50%; }
+.bubble .bt { margin: 12px 4px 16px; font-size: 33px; font-weight: 600; line-height: 1.32; color: #1f1410; }
+.bubble .bi { width: 100%; border-radius: 16px; }
+.note { font-family: 'ZK'; font-size: 38px; white-space: nowrap; color: var(--choc); margin-bottom: 18px; }
+
+/* ── 怎么搜（自己画的搜索框 / 搜索结果，不放任何 App 的截图） ── */
+.guide .flow { position: absolute; left: 46px; right: 46px; top: 316px; display: flex; flex-direction: column; gap: 18px; }
+.step { display: flex; align-items: center; gap: 18px; font-family: 'ZK'; font-size: 48px; color: var(--choc); margin-top: 14px; }
+.step i { font-style: normal; width: 62px; height: 62px; border-radius: 50%; background: var(--mint-deep); color: var(--white); font-family: 'Avenir Next'; font-weight: 800; font-size: 38px; display: flex; align-items: center; justify-content: center; }
+.search { height: 128px; background: #fff; border-radius: 64px; box-shadow: 0 14px 30px rgba(42, 22, 13, .14); display: flex; align-items: center; padding: 0 16px 0 40px; gap: 20px; }
+.mag { position: relative; width: 46px; height: 46px; border: 7px solid #a3958b; border-radius: 50%; flex: none; margin-top: -8px; }
+.mag::after { content: ''; position: absolute; width: 8px; height: 22px; background: #a3958b; border-radius: 4px; right: -12px; bottom: -18px; transform: rotate(-45deg); }
+.search .q { font-size: 52px; font-weight: 600; color: #1f1410; letter-spacing: 1px; }
+.search .caret { width: 5px; height: 58px; background: var(--mint-deep); border-radius: 3px; margin-left: -12px; }
+.search .go { margin-left: auto; background: var(--ink); color: var(--white); font-size: 42px; font-weight: 600; padding: 18px 40px 20px; border-radius: 50px; }
+.result { position: relative; background: #fff; border-radius: 36px; box-shadow: 0 14px 30px rgba(42, 22, 13, .14); display: flex; align-items: center; gap: 30px; padding: 30px 34px; }
+.result img { width: 156px; height: 156px; border-radius: 50%; flex: none; }
+.result .rt { min-width: 0; }
+.result .rt b { display: block; font-size: 52px; font-weight: 700; color: var(--mint-ink); }
+.result .kind { display: inline-block; margin-top: 6px; font-size: 32px; font-weight: 600; color: #8a7a70; }
+.result p { margin: 10px 0 0; font-size: 31px; color: #6f625a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 560px; }
+.result .tap { position: absolute; right: -26px; bottom: -88px; font-size: 118px; transform: rotate(-14deg); filter: drop-shadow(0 8px 10px rgba(42, 22, 13, .25)); }
+.tip { margin-top: 30px; white-space: nowrap; background: #dff1e7; border-radius: 30px; padding: 26px 34px 28px; font-size: 35px; font-weight: 600; line-height: 1.45; color: var(--mint-ink); }
+.cover .cbar { position: absolute; z-index: 3; left: 50%; top: 512px; width: 700px; height: 112px; transform: translateX(-50%); background: #fff; border-radius: 60px; box-shadow: 0 12px 0 rgba(42, 22, 13, .14); display: flex; align-items: center; gap: 18px; padding: 0 14px 0 38px; }
+.cover .cbar .q { font-size: 48px; font-weight: 600; color: #1f1410; }
+.cover .cbar .go { margin-left: auto; background: var(--ink); color: var(--white); font-size: 40px; font-weight: 600; padding: 15px 36px 17px; border-radius: 50px; }
+
+/* ── 拼图页 ── */
+.wall { background: var(--mint); }
+.wall .grid { position: absolute; left: 36px; top: 36px; width: 1008px; height: 1368px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(4, 1fr); gap: 18px; }
+.tile { position: relative; border-radius: 36px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.tile img { width: 86%; height: 86%; object-fit: contain; margin-top: -26px; filter: drop-shadow(0 14px 14px rgba(42, 22, 13, .18)); }
+.tile span { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; font-size: 30px; font-weight: 600; color: var(--choc); }
+.hub { grid-column: 2; grid-row: 2 / span 2; border-radius: 36px; background: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; }
+.hub img { width: 248px; height: 248px; border-radius: 50%; border: 9px solid var(--white); box-shadow: 0 10px 24px rgba(42, 22, 13, .2); }
+.hub .ol { font-family: 'ZK'; font-size: 52px; --fc: var(--ink); --sc: var(--white); --sw: 12px; }
+.hub small { white-space: nowrap; font-size: 28px; font-weight: 600; color: var(--mint-ink); letter-spacing: 2px; }
+</style>
+</head>
+<body>
+
+<!-- P1 封面 -->
+<section class="page cover" id="p1">
+  <div class="frame"></div>
+  <div class="brand"><img src="../assets/bear-mark.jpg"><span class="ol"><b>咔嚓熊捏捏</b><b>咔嚓熊捏捏</b></span></div>
+  <div class="hello"><span class="ol"><b>上线啦！</b><b>上线啦！</b></span></div>
+  <img class="mascot" src="../assets/mascot-cut.png">
+  <img class="orb" src="../shots/hero-blocks.png" style="width:262px; left:6px; top:640px; transform:rotate(-8deg)">
+  <img class="orb" src="../shots/hero-strawberry.png" style="width:236px; right:10px; top:604px; transform:rotate(10deg)">
+  <img class="orb" src="../shots/hero-choc.png" style="width:236px; left:22px; top:1006px">
+  <img class="orb" src="../shots/hero-foam.png" style="width:226px; right:22px; top:1032px">
+  <span class="spark" style="left:96px; top:520px">✦</span>
+  <span class="spark" style="right:120px; top:500px; font-size:40px">✦</span>
+  <span class="spark" style="left:240px; top:930px; font-size:34px">✦</span>
+  <span class="spark" style="right:84px; top:900px; font-size:46px">✦</span>
+  <div class="tag"><em>#小程序</em>功能介绍</div>
+</section>
+
+<!-- 封面 B：「上线啦！」下面加一个搜索框（可选） -->
+<section class="page cover" id="p1b">
+  <div class="frame"></div>
+  <div class="brand"><img src="../assets/bear-mark.jpg"><span class="ol"><b>咔嚓熊捏捏</b><b>咔嚓熊捏捏</b></span></div>
+  <div class="hello" style="top:196px"><span class="ol"><b>上线啦！</b><b>上线啦！</b></span></div>
+  <div class="cbar"><span class="mag"></span><span class="q">咔嚓熊捏捏</span><span class="go">搜索</span></div>
+  <img class="mascot" src="../assets/mascot-cut.png" style="width:720px; left:180px; top:668px">
+  <img class="orb" src="../shots/hero-blocks.png" style="width:250px; left:8px; top:690px; transform:rotate(-8deg)">
+  <img class="orb" src="../shots/hero-strawberry.png" style="width:226px; right:12px; top:676px; transform:rotate(10deg)">
+  <img class="orb" src="../shots/hero-choc.png" style="width:226px; left:26px; top:1040px">
+  <img class="orb" src="../shots/hero-foam.png" style="width:216px; right:26px; top:1060px">
+  <span class="spark" style="left:110px; top:650px; font-size:40px">✦</span>
+  <span class="spark" style="right:150px; top:640px; font-size:34px">✦</span>
+  <span class="spark" style="right:84px; top:950px; font-size:46px">✦</span>
+  <div class="tag"><em>#小程序</em>功能介绍</div>
+</section>
+
+<!-- 00 怎么搜 -->
+<section class="page feat guide" id="pg">
+  <div class="card">
+    <img class="avatar" src="../assets/bear-mark.jpg">
+    <p class="cap">搜「咔嚓熊捏捏」，认准抱着巧克力的小熊</p>
+    <div class="flow">
+      <div class="step"><i>1</i>输入名字，点搜索</div>
+      <div class="search"><span class="mag"></span><span class="q">咔嚓熊捏捏</span><span class="caret"></span><span class="go">搜索</span></div>
+      <div class="step" style="margin-top:22px"><i>2</i>点带这个头像的「咔嚓熊捏捏」</div>
+      <div class="result">
+        <img src="../assets/mp-icon.png">
+        <div class="rt"><b>咔嚓熊捏捏</b><span class="kind">小程序</span><p>咔嚓熊：3D 手作小工具。亲手做一颗捏捏，捏到停不下来</p></div>
+        <span class="tap">👆</span>
+      </div>
+      <div class="tip">💡 进去点右上角「···」→ 添加到我的小程序</div>
+    </div>
+  </div>
+  <div class="ttl"><span class="ol num"><b>00</b><b>00</b></span><span class="ol word"><b>搜一搜就能玩</b><b>搜一搜就能玩</b></span></div>
+</section>
+
+<!-- P2 01 自己做一颗 -->
+<section class="page feat" id="p2">
+  <div class="card">
+    <img class="avatar" src="../assets/bear-mark.jpg">
+    <p class="cap">选一种喜欢的，一步一步亲手做</p>
+    <div class="stage">
+      <div class="col"><img class="phone w3" src="../shots/kinds.png"><span class="pill">先挑一种</span></div>
+      <div class="col"><img class="phone w3" src="../shots/step-dip.png"><span class="pill">一步步做</span></div>
+      <div class="col"><img class="phone w3" src="../shots/hbstep-name.png"><span class="pill">起个名字</span></div>
+    </div>
+  </div>
+  <div class="ttl"><span class="ol num"><b>01</b><b>01</b></span><span class="ol word"><b>自己做一颗</b><b>自己做一颗</b></span></div>
+</section>
+
+<!-- P3 02 捏到停不下来 -->
+<section class="page feat" id="p3">
+  <div class="card">
+    <img class="avatar" src="../assets/bear-mark.jpg">
+    <p class="cap">按下去「咔嚓」一声，越捏越停不下来</p>
+    <div class="stage">
+      <div class="col"><img class="phone w3" src="../shots/play-choc.png"><span class="pill">巧克力 · 捏裂</span></div>
+      <div class="col"><img class="phone w3" src="../shots/play-blocks.png"><span class="pill">积木球 · 咔哒</span></div>
+      <div class="col"><img class="phone w3" src="../shots/play-foam-spread.png"><span class="pill">起泡胶 · 铺开揉</span></div>
+    </div>
+  </div>
+  <div class="ttl"><span class="ol num"><b>02</b><b>02</b></span><span class="ol word"><b>捏到停不下来</b><b>捏到停不下来</b></span></div>
+</section>
+
+<!-- P4 03 送给 TA -->
+<section class="page feat" id="p4">
+  <div class="card">
+    <img class="avatar" src="../assets/bear-mark.jpg">
+    <p class="cap">点「送给 TA」，发到聊天里就是一张卡片</p>
+    <div class="stage" style="gap:40px; align-items:center; top:330px">
+      <div class="col">
+        <img class="phone w2" src="../shots/share-21.png">
+        <img class="chip" src="../shots/el-sendta-21.png" style="width:250px; left:-26px; top:520px; transform:rotate(-4deg)">
+      </div>
+      <div class="col" style="margin-top:-40px">
+        <span class="note">朋友收到的是这样一张 👇</span>
+        <div class="bubble">
+          <div class="bh"><img src="../assets/bear-mark.jpg">咔嚓熊捏捏</div>
+          <div class="bt">送你一颗「星星积木球」，点开就能捏</div>
+          <img class="bi" src="../shots/card-21.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ttl"><span class="ol num"><b>03</b><b>03</b></span><span class="ol word"><b>送给 TA</b><b>送给 TA</b></span></div>
+</section>
+
+<!-- P5 04 做一颗送回去 -->
+<section class="page feat" id="p5">
+  <div class="card">
+    <img class="avatar" src="../assets/bear-mark.jpg">
+    <p class="cap">TA 点开就能捏，还能做一颗回赠你</p>
+    <div class="stage" style="gap:64px">
+      <div class="col">
+        <img class="phone w2" src="../shots/recv-nudge-21.png">
+        <img class="chip" src="../shots/el-nudge-21.png" style="width:400px; left:-40px; top:118px; border-radius:60px; transform:rotate(-3deg)">
+      </div>
+      <div class="col">
+        <img class="phone w2" src="../shots/ret-kinds-21.png">
+        <img class="chip" src="../shots/el-retbadge-21.png" style="width:420px; left:-46px; top:84px; border-radius:40px; transform:rotate(2deg)">
+      </div>
+    </div>
+  </div>
+  <div class="ttl"><span class="ol num"><b>04</b><b>04</b></span><span class="ol word"><b>做一颗送回去</b><b>做一颗送回去</b></span></div>
+</section>
+
+<!-- P6 05 每日幸运饼干 -->
+<section class="page feat" id="p6">
+  <div class="card">
+    <img class="avatar" src="../assets/bear-mark.jpg">
+    <p class="cap">每天一块，捏开抽一支今天的签</p>
+    <div class="stage">
+      <div class="col"><img class="phone w3" src="../shots/home.png"><span class="pill">首页每天一块</span></div>
+      <div class="col"><img class="phone w3" src="../shots/cookie-before.png"><span class="pill">用力捏三下</span></div>
+      <div class="col" style="width:298px; height:652px; justify-content:center">
+        <img class="chip" src="../shots/el-fortune.png" style="position:relative; width:316px; transform:rotate(3deg)">
+        <span class="pill" style="margin-top:44px">掰开就是今天的签</span>
+      </div>
+    </div>
+  </div>
+  <div class="ttl"><span class="ol num"><b>05</b><b>05</b></span><span class="ol word"><b>每日幸运饼干</b><b>每日幸运饼干</b></span></div>
+</section>
+
+<!-- P7 06 我做的捏捏 -->
+<section class="page feat" id="p7">
+  <div class="card">
+    <img class="avatar" src="../assets/bear-mark.jpg">
+    <p class="cap">做过的每一颗都在货架上，随时拿下来再捏</p>
+    <div class="stage" style="gap:64px">
+      <div class="col"><img class="phone w2s" src="../shots/shelf.png"><span class="pill mint">一颗都不会丢</span></div>
+      <div class="col"><img class="phone w2s" src="../shots/play-strawberry.png"><span class="pill mint">点一下接着捏</span></div>
+    </div>
+  </div>
+  <div class="ttl"><span class="ol num"><b>06</b><b>06</b></span><span class="ol word"><b>我做的捏捏</b><b>我做的捏捏</b></span></div>
+</section>
+
+<!-- P8 一桌捏捏 -->
+<section class="page wall" id="p8">
+  <div class="grid">
+    <div class="tile" style="background:#f6e6d6"><img src="../shots/hero-choc.png"><span>巧克力脆皮</span></div>
+    <div class="tile" style="background:#fbe0e0"><img src="../shots/hero-strawberry.png"><span>红草莓</span></div>
+    <div class="tile" style="background:#e1eefa"><img src="../shots/hero-blocks.png"><span>积木球</span></div>
+    <div class="tile" style="background:#fae3ea"><img src="../shots/hero-ice.png"><span>冰条球</span></div>
+    <div class="hub"><img src="../assets/bear-mark.jpg"><span class="ol"><b>咔嚓熊捏捏</b><b>咔嚓熊捏捏</b></span><small>做一颗，送给想送的人</small></div>
+    <div class="tile" style="background:#fbe3ee"><img src="../shots/hero-foam.png"><span>起泡胶</span></div>
+    <div class="tile" style="background:#f8eed8"><img src="../shots/hero-cookie.png"><span>幸运饼干</span></div>
+    <div class="tile" style="background:#ebf1e2"><img src="../shots/hero-mooncake.png"><span>冰皮月饼</span></div>
+    <div class="tile" style="background:#ece4f6"><img src="../shots/hero-wax.png"><span>蜡皮捏捏</span></div>
+    <div class="tile" style="background:#e8f3da"><img src="../shots/hero-grape.png"><span>奶冻青提</span></div>
+    <div class="tile" style="background:#e3eef8"><img src="../shots/hero-foamspread.png"><span>一摊起泡胶</span></div>
+  </div>
+</section>
+
+</body>
+</html>
